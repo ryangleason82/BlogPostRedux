@@ -26,3 +26,19 @@ Another learning application to hammer home some concepts related to react, redu
 - We get fetched data into a component by generating new state in our redux store, then getitng that into our component through mapStateToProps
   - Some reducer sees the action, returns the data off the 'payload'
   - Because we generated some new state object, redux/react-redux cause our React app to be rerendered
+
+#### Error: "use custom missleware for async actions"
+
+- What's wrong with 'fetchPosts'?
+  - Actions creators must return plain JS objects with a type property - we are not..
+  - By the time our action gets to a reducer, we won't have fetched our data
+- Synchronous action creator
+  - Instantly returns an action with data ready to go
+- Asynchronous action creator
+  - Takes some amount of time for it to get its data ready to go
+- Middleware as it relates to redux
+  - Function that gets called with every action we dispatch
+  - Has the ability to STOP, MODIFY, or otherwise mess around with actions
+  - Tons of open source middleware exist
+  - Most popular use of middleware is for dealing with async actions
+  - We are going to use a middleware called 'Redux-Thunk' to solve our async issues
