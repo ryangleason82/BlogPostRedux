@@ -42,3 +42,10 @@ Another learning application to hammer home some concepts related to react, redu
   - Tons of open source middleware exist
   - Most popular use of middleware is for dealing with async actions
   - We are going to use a middleware called 'Redux-Thunk' to solve our async issues
+
+#### Rules of Reducers
+
+- Must return any value besides 'undefined'
+- Produces 'state', or data to be used inside of your app using only previous state and the action (reducers are pure)
+- Must not return reach 'out of itself' to decide what value to return
+- Must not mutate its input 'state' argument
