@@ -49,3 +49,36 @@ Another learning application to hammer home some concepts related to react, redu
 - Produces 'state', or data to be used inside of your app using only previous state and the action (reducers are pure)
 - Must not return reach 'out of itself' to decide what value to return
 - Must not mutate its input 'state' argument
+
+##### State v1 + Action => Reducer -> State v2
+
+#### Updating the state
+
+- Removing an element from an array
+
+  - BAD: state.pop()
+  - GOOD: state.filter(element => element !== 'hi')
+
+- Adding an element to an array
+
+  - BAD: state.push('hi')
+  - GOOD: [...state, 'hi']
+
+- Replacing an element in an array
+
+  - BAD: state[0] = 'hi'
+  - GOOD: state.map(el => === 'hi' ? 'bye' : el)
+
+- Updating a property in an object
+
+  - BAD: state.name = 'Sam'
+  - GOOD: { ...state, name: 'Sam'}
+
+- Adding a property to an object
+
+  - BAD: state.age = 30
+  - GOOD: {...state, age: 30}
+
+- Removing a property from an object
+  - BAD: delete state.name
+  - GOOD: { ...state, age: undefined } also \_.omit(state, 'age')
