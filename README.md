@@ -82,3 +82,23 @@ Another learning application to hammer home some concepts related to react, redu
 - Removing a property from an object
   - BAD: delete state.name
   - GOOD: { ...state, age: undefined } also \_.omit(state, 'age')
+
+#### Memoizing Functions
+
+- Issue: overfetching users. Making 10 requests to API when we should onlyl be making 1
+- Solution: Memoization.
+- \_.memoize( func, [resolver])
+  - Creates a funciton that memoizes the result of func.
+
+```javascript
+func getUser(number){
+    fetch(number);
+    return "Request made"
+}
+const memoizedGetUser = _.memoize(getUser())
+
+memoizedGetUser(3) // getUser is called with a request of 3
+memoizedGetUser(3) // no request is made becuase it is MEMOIZED
+memoizedGetUser(3) // still no request is made
+memoizedGetUser(4) // a request is made of 4 because it is new
+```
