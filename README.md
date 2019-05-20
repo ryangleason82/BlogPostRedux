@@ -87,7 +87,7 @@ Another learning application to hammer home some concepts related to react, redu
 
 - Issue: overfetching users. Making 10 requests to API when we should onlyl be making 1
 - Solution: Memoization.
-- \_.memoize( func, [resolver])
+- \_.memoize( func, [resolver]) from the lodash libary (npm i --save lodash)
   - Creates a funciton that memoizes the result of func.
 
 ```javascript
@@ -102,3 +102,27 @@ memoizedGetUser(3) // no request is made becuase it is MEMOIZED
 memoizedGetUser(3) // still no request is made
 memoizedGetUser(4) // a request is made of 4 because it is new
 ```
+
+#### The memoized solution in this project
+
+Can be found in actions/index.js
+
+```javascript
+export const fetchUser = id => dispatch => _fetchUser(id, dispatch);
+
+const _fetchUser = _.memoize(async (id, dispatch) => {
+	const response = await jsonPlaceholder.get(`/users/${id}`);
+
+	dispatch({ type: "FETCH_USER", payload: response.data });
+});
+```
+
+#### An alternate solution to memoization
+
+fetchPostsAndUser()
+
+- Call 'fetchPosts'
+- Get list of posts
+- Find all unique userId's from list of posts
+- Iterate over unique userId's
+- Call 'fetchUser' with each userId
